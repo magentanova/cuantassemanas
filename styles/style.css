@@ -1,0 +1,38 @@
+body {
+    background: black;
+}
+
+.container {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.h1-wrapper {
+    position: fixed;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    width: 100%;
+}
+
+h1 {
+    font-weight: 300;
+    font-size: 8rem;
+    text-transform: uppercase;
+    position: relative;
+    margin: 0;
+}
+
+button {
+    outline: none;
+    border: none;
+    background: none;
+    text-decoration: underline;
+    color: #ddd;
+    cursor: pointer;
+    position: absolute;
+    bottom: -36px;
+    font-size: 1.25rem;
+}
