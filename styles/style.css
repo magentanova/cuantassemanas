@@ -30,9 +30,20 @@ button {
     border: none;
     background: none;
     text-decoration: underline;
+}
+
+button#display-toggle {
     color: #ddd;
     cursor: pointer;
     position: absolute;
     bottom: -36px;
     font-size: 1.25rem;
+}
+
+button#lang-toggle {
+    font-size: 1.25rem;
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    cursor: pointer;
 }
