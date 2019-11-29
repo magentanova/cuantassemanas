@@ -5,36 +5,16 @@ let lang = "es"
 const today = new moment()
 const day0 = new moment("2019-07-10")
 
-const translationDict = {
-    "months": {
-        "en": "months",
-        "es": "meses",
-    },
-    "days": {
-        "en": "days",
-        "es": "días",
-    },
-    "weeks": {
-        "en": "weeks",
-        "es": "semanas",
-    },
-    "month": {
-        "en": "month",
-        "es": "mes",
-    },
-    "day": {
-        "en": "day",
-        "es": "día",
-    },
-    "week": {
-        "en": "week",
-        "es": "semana",
-    }
-}
-
 const add = (m,v,t) => m.clone().add(v,t)
 
-const getTranslation = text => {
+const handleNumber = (word, n) => {
+    if (n === 1) {
+        return word
+    }
+    return pluralsDict[word]
+}
+
+const translate = text => {
     return text.split(/[\s]/g).map(word => {
         if (translationDict[word]) {
             return translationDict[word][lang]
@@ -56,8 +36,10 @@ const render = () => {
 const showWeeks = () => {
     const weeks = today.diff(day0, "weeks")
     const days = today.diff(add(day0,weeks,"weeks"), "days")
-    $("h1").innerHTML = getTranslation(`
-        ${weeks} weeks <br> ${days} days
+    $("h1").innerHTML = translate(`
+        ${weeks} ${handleNumber("week",weeks)} 
+        <br> 
+        ${days} ${handleNumber("day",days)}
     `)
 }
 
@@ -66,18 +48,22 @@ const showMonths = () => {
     console.log(today, day0, months)
     const weeks = today.diff(add(day0,months, "months"), "weeks")
     const days = today.diff(add(add(day0,months,"months"),weeks,"weeks"), "days")
-    $("h1").innerHTML = getTranslation(`
-        ${months} months <br> ${weeks} weeks <br> ${days} days
+    $("h1").innerHTML = translate(`
+        ${months} ${handleNumber("month",months)} 
+        <br> 
+        ${weeks} ${handleNumber("week",weeks)} 
+        <br> 
+        ${days} ${handleNumber("day",days)}
     `)
 }
 
 const toggleDisplay = () => {
     if (displayType === "weeks") {
         displayType = "months"
-        $("button").innerHTML = getTranslation("weeks")
+        $("button").innerHTML = translate("weeks")
     }
     else {
-        $("button").innerHTML = getTranslation("months")
+        $("button").innerHTML = translate("months")
         displayType = "weeks"
     }
     render()
